@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web & API Security Scanner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            color: #1f2937;
+        }
+
+        header {
+            background: #17365d;
+            color: white;
+            padding: 22px 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            color: #dbeafe;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #17365d;
+        }
+
+        .description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 20px 0 8px;
+        }
+
+        input[type="url"],
+        input[type="text"] {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #93c5fd;
+            border-color: #2563eb;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+
+        .scan-button {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        .scan-button:hover {
+            background: #1e40af;
+        }
+
+        .history-button {
+            background: #17365d;
+            color: white;
+            margin-left: 8px;
+        }
+
+        .history-button:hover {
+            background: #274c77;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .feature {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .feature h3 {
+            color: #17365d;
+            margin-top: 0;
+        }
+
+        .notice {
+            background: #fff7ed;
+            border-left: 4px solid #f59e0b;
+            padding: 14px;
+            border-radius: 4px;
+            line-height: 1.5;
+            color: #7c2d12;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            .container {
+                margin-top: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .history-button {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Web & API Security Scanner</h1>
+    <p>Automated security assessment for authorized web applications and APIs</p>
+</header>
+
+<main class="container">
+
+    <section class="card">
+        <h2>Security Scanner Dashboard</h2>
+
+        <p class="description">
+            Enter the URL of a web application or API you own or have
+            explicit permission to test. The scanner checks configured
+            security indicators and displays potential findings.
+        </p>
+
+        {% if error %}
+            <div class="notice">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        <form action="{{ url_for('scan') }}" method="POST">
+
+            <label for="target">Target URL</label>
+
+            <input
+                type="url"
+                id="target"
+                name="target"
+                placeholder="http://127.0.0.1:5000"
+                required
+            >
+
+            <button type="submit" class="button scan-button">
+                Start Security Scan
+            </button>
+
+            <a
+                href="{{ url_for('scan_history') }}"
+                class="button history-button"
+            >
+                View Scan History
+            </a>
+
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Scanner Features</h2>
+
+        <div class="features">
+
+            <div class="feature">
+                <h3>Security Headers</h3>
+                <p>
+                    Checks configured HTTP security headers and
+                    identifies missing or invalid values.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Cookie Security</h3>
+                <p>
+                    Checks cookie attributes such as Secure,
+                    HttpOnly and SameSite.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Technology Detection</h3>
+                <p>
+                    Identifies server technology information disclosed
+                    through HTTP response headers.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Scan History</h3>
+                <p>
+                    Saves scan results in the database so you can
+                    review previous scans and their findings.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>Severity Classification</h3>
+                <p>
+                    Organizes findings by severity to help prioritize
+                    security review.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>OWASP Mapping</h3>
+                <p>
+                    Provides contextual security descriptions and
+                    references for supported findings.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Important Notice</h2>
+
+        <p class="notice">
+            Use this scanner only on systems you own or have explicit
+            permission to test. Findings are indicators that require
+            manual verification; they are not automatically confirmed
+            vulnerabilities.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    Web & API Security Scanner | Python and Flask
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Scan Results | Web & API Security Scanner</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 25px;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f7fb;
+        color: #263238;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .header {
+        background: #172b4d;
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+    }
+
+    .header h1 {
+        margin: 0 0 8px;
+    }
+
+    .header p {
+        margin: 0;
+        color: #dbe6f5;
+    }
+
+    .card {
+        background: white;
+        padding: 22px;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #172b4d;
+    }
+
+    .scan-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+    }
+
+    .info-item {
+        padding: 14px;
+        background: #f4f7fb;
+        border-radius: 7px;
+        overflow-wrap: anywhere;
+    }
+
+    .info-label {
+        display: block;
+        font-size: 13px;
+        color: #607080;
+        margin-bottom: 7px;
+    }
+
+    .info-value {
+        font-weight: bold;
+    }
+
+    .severity-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 14px;
+    }
+
+    .severity-card {
+        background: #f4f7fb;
+        padding: 18px;
+        text-align: center;
+        border-radius: 8px;
+        border-top: 4px solid #607d8b;
+    }
+
+    .severity-card h3 {
+        margin: 0 0 10px;
+        font-size: 15px;
+    }
+
+    .severity-number {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .critical {
+        border-top-color: #8e0000;
+    }
+
+    .high {
+        border-top-color: #d32f2f;
+    }
+
+    .medium {
+        border-top-color: #f57c00;
+    }
+
+    .low {
+        border-top-color: #1976d2;
+    }
+
+    .informational {
+        border-top-color: #607d8b;
+    }
+
+    .total {
+        border-top-color: #388e3c;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 12px;
+        border: 1px solid #dce2e8;
+        text-align: left;
+        vertical-align: top;
+        overflow-wrap: anywhere;
+    }
+
+    th {
+        background: #172b4d;
+        color: white;
+    }
+
+    tbody tr:nth-child(even) {
+        background: #f7f9fc;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 5px 9px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .badge-critical {
+        background: #ffdddd;
+        color: #8e0000;
+    }
+
+    .badge-high {
+        background: #ffe0e0;
+        color: #b71c1c;
+    }
+
+    .badge-medium {
+        background: #fff0d5;
+        color: #8a4b00;
+    }
+
+    .badge-low {
+        background: #dceeff;
+        color: #084b83;
+    }
+
+    .badge-informational {
+        background: #e8edf0;
+        color: #455a64;
+    }
+
+    .finding-details {
+        border: 1px solid #dce2e8;
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 16px;
+        background: #ffffff;
+    }
+
+    .finding-details h3 {
+        margin-top: 0;
+        color: #172b4d;
+    }
+
+    .finding-details p {
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+    }
+
+    .evidence {
+        padding: 12px;
+        background: #f4f7fb;
+        border-radius: 6px;
+        overflow-wrap: anywhere;
+    }
+
+    a {
+        color: #075cb8;
+        overflow-wrap: anywhere;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 12px 20px;
+        background: #1769aa;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .button:hover {
+        background: #0d4778;
+    }
+
+    .notice {
+        padding: 15px;
+        background: #fff8e1;
+        border-left: 4px solid #f9a825;
+        border-radius: 5px;
+        line-height: 1.6;
+    }
+
+    .empty-state {
+        padding: 18px;
+        background: #e8f5e9;
+        border-radius: 6px;
+    }
+
+    footer {
+        margin-top: 25px;
+        color: #607080;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 12px;
+        }
+
+        .header, .card {
+            padding: 16px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+<div class="container">
+
+```
+<header class="header">
+    <h1>Web &amp; API Security Scanner</h1>
+    <p>Automated security assessment for authorized web applications and APIs.</p>
+</header>
+
+{# Safely obtain scan results and findings #}
+{% set scan_data = results if results is defined and results is mapping else {} %}
+{% set findings = scan_data.get('findings', []) %}
+{% set findings = findings if findings is iterable and findings is not string and findings is not mapping else [] %}
+
+{% set display_target = scan_data.get('target') or target|default('Unknown', true) %}
+{% set display_scan_id = scan_id|default(scan_data.get('scan_id', 'N/A'), true) %}
+{% set display_status = scan_data.get('status_code', 'N/A') %}
+{% set display_time = scan_data.get('response_time', 'N/A') %}
+
+{# Calculate severity counts directly; no summary variable is needed #}
+{% set critical_count = findings | selectattr('severity', 'defined') | selectattr('severity', 'equalto', 'Critical') | list | length %}
+{% set high_count = findings | selectattr('severity', 'defined') | selectattr('severity', 'equalto', 'High') | list | length %}
+{% set medium_count = findings | selectattr('severity', 'defined') | selectattr('severity', 'equalto', 'Medium') | list | length %}
+{% set low_count = findings | selectattr('severity', 'defined') | selectattr('severity', 'equalto', 'Low') | list | length %}
+{% set info_count = findings | selectattr('severity', 'defined') | selectattr('severity', 'equalto', 'Informational') | list | length %}
+
+<section class="card">
+    <h2>Scan Information</h2>
+
+    <div class="scan-info">
+        <div class="info-item">
+            <span class="info-label">Scan ID</span>
+            <span class="info-value">{{ display_scan_id }}</span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Target URL</span>
+            <span class="info-value">
+                {% if display_target and display_target != 'Unknown' %}
+                    {{ display_target }}
+                {% else %}
+                    Target URL unavailable
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">HTTP Status</span>
+            <span class="info-value">{{ display_status }}</span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Response Time</span>
+            <span class="info-value">
+                {% if display_time is number %}
+                    {{ "%.2f"|format(display_time) }} seconds
+                {% else %}
+                    {{ display_time }}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Severity Summary</h2>
+
+    <div class="severity-grid">
+        <div class="severity-card critical">
+            <h3>Critical</h3>
+            <div class="severity-number">{{ critical_count }}</div>
+        </div>
+
+        <div class="severity-card high">
+            <h3>High</h3>
+            <div class="severity-number">{{ high_count }}</div>
+        </div>
+
+        <div class="severity-card medium">
+            <h3>Medium</h3>
+            <div class="severity-number">{{ medium_count }}</div>
+        </div>
+
+        <div class="severity-card low">
+            <h3>Low</h3>
+            <div class="severity-number">{{ low_count }}</div>
+        </div>
+
+        <div class="severity-card informational">
+            <h3>Informational</h3>
+            <div class="severity-number">{{ info_count }}</div>
+        </div>
+
+        <div class="severity-card total">
+            <h3>Total Findings</h3>
+            <div class="severity-number">{{ findings|length }}</div>
+        </div>
+    </div>
+
+    <p class="notice">
+        Severity counts are calculated from the severity values in the
+        scanner's findings. Findings without a recognized severity value
+        are included in the total but not in the individual severity counts.
+    </p>
+</section>
+
+<section class="card">
+    <h2>Security Findings</h2>
+
+    {% if findings %}
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Finding</th>
+                    <th>Type</th>
+                    <th>Severity</th>
+                    <th>URL</th>
+                    <th>Evidence</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for finding in findings %}
+                    {% if finding is mapping %}
+                        {% set severity = finding.get('severity', 'Informational') %}
+                        {% set severity_class = severity|lower %}
+
+                        <tr>
+                            <td>{{ loop.index }}</td>
+
+                            <td>
+                                {{ finding.get('name', 'Unnamed finding') }}
+                            </td>
+
+                            <td>
+                                {{ finding.get('type', finding.get('category', 'Security Finding')) }}
+                            </td>
+
+                            <td>
+                                <span class="badge badge-{{ severity_class }}">
+                                    {{ severity }}
+                                </span>
+                            </td>
+
+                            <td>
+                                {% set finding_url = finding.get('url', display_target) %}
+                                {% if finding_url %}
+                                    <a href="{{ finding_url }}"
+                                       target="_blank"
+                                       rel="noopener noreferrer">
+                                        {{ finding_url }}
+                                    </a>
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {{ finding.get('evidence', finding.get('description', 'No evidence provided')) }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h2 style="margin-top: 30px;">OWASP Mapping &amp; Finding Details</h2>
+
+        {% for finding in findings %}
+            {% if finding is mapping %}
+                <article class="finding-details">
+                    <h3>
+                        Finding {{ loop.index }}:
+                        {{ finding.get('name', 'Unnamed finding') }}
+                    </h3>
+
+                    <p>
+                        <strong>Severity:</strong>
+                        {{ finding.get('severity', 'Informational') }}
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong>
+                        {{ finding.get('description', 'No additional description is available for this finding.') }}
+                    </p>
+
+                    <p>
+                        <strong>OWASP Category:</strong>
+                        {{ finding.get('owasp_category', 'Not mapped') }}
+                    </p>
+
+                    <p>
+                        <strong>Reference:</strong>
+
+                        {% set reference = finding.get('reference', '') %}
+
+                        {% if reference and reference.startswith('https://') %}
+                            <a href="{{ reference }}"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                View Security Guidance
+                            </a>
+                        {% else %}
+                            No reference available
+                        {% endif %}
+                    </p>
+
+                    {% if finding.get('evidence') %}
+                        <p><strong>Evidence:</strong></p>
+                        <div class="evidence">{{ finding.get('evidence') }}</div>
+                    {% endif %}
+                </article>
+            {% endif %}
+        {% endfor %}
+
+    {% else %}
+        <p class="empty-state">
+            No security findings were returned for this scan.
+            This does not necessarily mean the target is completely secure.
+        </p>
+    {% endif %}
+</section>
+
+<section class="card">
+    <h2>Important Notice</h2>
+    <p class="notice">
+        Results are based on the scanner's configured checks. Review each
+        finding and its context before treating it as a confirmed
+        vulnerability. Only scan applications you own or have explicit
+        permission to test.
+    </p>
+</section>
+
+<a class="button" href="{{ url_for('index') }}">Scan Another Target</a>
+
+<footer>
+    Web &amp; API Security Scanner — Security testing for authorized targets.
+</footer>
+```
+
+</div>
+</body>
+</html>
