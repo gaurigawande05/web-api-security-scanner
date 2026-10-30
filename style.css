@@ -1,0 +1,474 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    color: #212529;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: #1f2937;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 25px;
+}
+
+h3 {
+    font-size: 21px;
+}
+
+p {
+    overflow-wrap: anywhere;
+}
+
+a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------- Main Container ---------- */
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ---------- Header ---------- */
+
+header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+header h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #123b66;
+}
+
+header h2 {
+    margin-top: 5px;
+    color: #495057;
+}
+
+
+/* ---------- Forms ---------- */
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="search"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+
+/* ---------- Buttons ---------- */
+
+button,
+input[type="submit"] {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #0a58ca;
+}
+
+button:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+}
+
+
+/* ---------- Error Messages ---------- */
+
+.error,
+.error-message {
+    padding: 12px 15px;
+    margin: 15px 0;
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    border-radius: 6px;
+}
+
+
+/* ---------- Scan Information ---------- */
+
+.scan-information,
+.severity-summary,
+.findings-section {
+    margin-bottom: 25px;
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.scan-information h3,
+.severity-summary h3,
+.findings-section h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.scan-information p {
+    margin: 10px 0;
+}
+
+.scan-information strong {
+    color: #123b66;
+}
+
+
+/* ---------- Severity Summary ---------- */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(140px, 1fr)
+    );
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.summary-card {
+    padding: 18px 12px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #6c757d;
+    border-radius: 7px;
+}
+
+.summary-card h4 {
+    margin: 0 0 10px;
+    font-size: 15px;
+}
+
+.summary-card p {
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/* ---------- Severity Card Indicators ---------- */
+
+.summary-card.critical {
+    border-left-color: #842029;
+}
+
+.summary-card.high {
+    border-left-color: #dc3545;
+}
+
+.summary-card.medium {
+    border-left-color: #fd7e14;
+}
+
+.summary-card.low {
+    border-left-color: #ffc107;
+}
+
+.summary-card.info {
+    border-left-color: #0d6efd;
+}
+
+.summary-card.total {
+    border-left-color: #6c757d;
+}
+
+
+/* ---------- Tables ---------- */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+thead {
+    background-color: #123b66;
+    color: #ffffff;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+    overflow-wrap: anywhere;
+}
+
+th {
+    font-size: 14px;
+}
+
+td {
+    font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: #eef4fb;
+}
+
+
+/* ---------- Finding Severity Badges ---------- */
+
+.severity-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+/* Critical */
+
+.severity-badge.critical {
+    color: #ffffff;
+    background-color: #842029;
+}
+
+
+/* High */
+
+.severity-badge.high {
+    color: #842029;
+    background-color: #f8d7da;
+}
+
+
+/* Medium */
+
+.severity-badge.medium {
+    color: #664d03;
+    background-color: #fff3cd;
+}
+
+
+/* Low */
+
+.severity-badge.low {
+    color: #055160;
+    background-color: #cff4fc;
+}
+
+
+/* Informational */
+
+.severity-badge.info {
+    color: #41464b;
+    background-color: #e2e3e5;
+}
+
+
+/* ---------- Navigation Links ---------- */
+
+.page-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.page-navigation a {
+    display: inline-block;
+    padding: 11px 16px;
+    color: #ffffff;
+    background-color: #0d6efd;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.page-navigation a:hover {
+    background-color: #0a58ca;
+    text-decoration: none;
+}
+
+
+/* ---------- General Links Styled as Buttons ---------- */
+
+.button-link {
+    display: inline-block;
+    padding: 10px 16px;
+    margin: 5px 0;
+    color: #ffffff;
+    background-color: #0d6efd;
+    border-radius: 6px;
+}
+
+.button-link:hover {
+    color: #ffffff;
+    background-color: #0a58ca;
+    text-decoration: none;
+}
+
+
+/* ---------- Footer ---------- */
+
+footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
+    font-size: 13px;
+}
+
+
+/* ---------- Empty Results / History ---------- */
+
+.empty-message {
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px dashed #ced4da;
+    border-radius: 6px;
+    color: #495057;
+}
+
+
+/* ---------- Responsive Design ---------- */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 96%;
+        margin: 12px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 21px;
+    }
+
+    h3 {
+        font-size: 19px;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .summary-card {
+        padding: 14px 8px;
+    }
+
+    .summary-card p {
+        font-size: 25px;
+    }
+
+    .scan-information,
+    .severity-summary,
+    .findings-section {
+        padding: 15px;
+    }
+
+    .page-navigation {
+        flex-direction: column;
+    }
+
+    .page-navigation a {
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    button,
+    input[type="submit"] {
+        font-size: 14px;
+    }
+}
