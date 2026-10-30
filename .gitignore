@@ -1,0 +1,32 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded files and generated scan data
+uploads/
+reports/
+scan_results/
+
+# Logs
+*.log
+
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
