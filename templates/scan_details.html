@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Scan Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 25px;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1, h2 {
+            color: #17365d;
+        }
+
+        .info {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-wrap: anywhere;
+        }
+
+        .finding {
+            border: 1px solid #e5e7eb;
+            border-radius: 7px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-right: 8px;
+            background: #1d4ed8;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .secondary {
+            background: #475569;
+        }
+
+        a {
+            overflow-wrap: anywhere;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .empty {
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Saved Scan Details</h1>
+
+    <div class="info">
+        <p>
+            <span class="label">Scan ID:</span>
+            {{ scan.id }}
+        </p>
+
+        <p>
+            <span class="label">Target URL:</span>
+            {{ scan.target_url }}
+        </p>
+
+        <p>
+            <span class="label">HTTP Status:</span>
+            {{ scan.status_code if scan.status_code is not none else "N/A" }}
+        </p>
+
+        <p>
+            <span class="label">Response Time:</span>
+            {% if scan.response_time is not none %}
+                {{ scan.response_time }} seconds
+            {% else %}
+                N/A
+            {% endif %}
+        </p>
+
+        <p>
+            <span class="label">Findings Count:</span>
+            {{ scan.findings_count }}
+        </p>
+
+        <p>
+            <span class="label">Scan Date:</span>
+            {{ scan.scan_date }}
+        </p>
+    </div>
+
+    <h2>Security Findings</h2>
+
+    {% if scan.findings %}
+        {% for finding in scan.findings %}
+        <div class="finding">
+
+            <h3>{{ finding.get('name', 'Unnamed Finding') }}</h3>
+
+            <p>
+                <span class="label">Severity:</span>
+                {{ finding.get('severity', 'Unknown') }}
+            </p>
+
+            <p>
+                <span class="label">Type:</span>
+                {{ finding.get('type', finding.get('category', 'N/A')) }}
+            </p>
+
+            <p>
+                <span class="label">URL:</span>
+                {{ finding.get('url', scan.target_url) }}
+            </p>
+
+            <p>
+                <span class="label">Evidence:</span>
+                {{ finding.get('evidence', 'No evidence recorded.') }}
+            </p>
+
+            <p>
+                <span class="label">Description:</span>
+                {{ finding.get('description', 'No description available.') }}
+            </p>
+
+            <p>
+                <span class="label">OWASP Category:</span>
+                {{ finding.get('owasp_category', 'Not mapped') }}
+            </p>
+
+            {% if finding.get('reference') %}
+            <p>
+                <span class="label">Reference:</span>
+                <a
+                    href="{{ finding.get('reference') }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Security Guidance
+                </a>
+            </p>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty">No findings were saved for this scan.</p>
+    {% endif %}
+
+    <a href="{{ url_for('scan_history') }}" class="button secondary">
+        Back to Scan History
+    </a>
+
+    <a href="{{ url_for('index') }}" class="button">
+        Start New Scan
+    </a>
+
+</div>
+</body>
+</html>
